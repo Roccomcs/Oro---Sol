@@ -5,31 +5,32 @@
  */
 import { useEffect, useState } from 'react';
 import { existeEnSesion, guardarEnSesion } from '../utilidades/sesion';
-import { usarMovimientoReducido } from './usarMovimientoReducido';
 
 const CLAVE_PRESENTACION = 'oro-glow-presentacion-vista';
 
 export function usarPresentacionMarca() {
-  const reducirMovimiento = usarMovimientoReducido();
   const [visible, establecerVisible] = useState(false);
   const [saliendo, establecerSaliendo] = useState(false);
 
   useEffect(() => {
     if (existeEnSesion(CLAVE_PRESENTACION)) return;
 
-    guardarEnSesion(CLAVE_PRESENTACION);
+    const reducirMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     establecerVisible(true);
 
     const espera = reducirMovimiento ? 120 : 1_250;
     const tiempoSalida = reducirMovimiento ? 100 : 450;
     const temporizadorSalida = window.setTimeout(() => establecerSaliendo(true), espera);
-    const temporizadorFin = window.setTimeout(() => establecerVisible(false), espera + tiempoSalida);
+    const temporizadorFin = window.setTimeout(() => {
+      establecerVisible(false);
+      guardarEnSesion(CLAVE_PRESENTACION);
+    }, espera + tiempoSalida);
 
     return () => {
       window.clearTimeout(temporizadorSalida);
       window.clearTimeout(temporizadorFin);
     };
-  }, [reducirMovimiento]);
+  }, []);
 
   return { visible, saliendo };
 }

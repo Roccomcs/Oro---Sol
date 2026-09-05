@@ -2,9 +2,17 @@
  * Encapsula el acceso defensivo al almacenamiento temporal del navegador.
  */
 export function existeEnSesion(clave: string) {
-  return window.sessionStorage.getItem(clave) !== null;
+  try {
+    return window.sessionStorage.getItem(clave) !== null;
+  } catch {
+    return false;
+  }
 }
 
 export function guardarEnSesion(clave: string) {
-  window.sessionStorage.setItem(clave, 'true');
+  try {
+    window.sessionStorage.setItem(clave, 'true');
+  } catch {
+    // La presentacion puede finalizar aunque el navegador bloquee sessionStorage.
+  }
 }

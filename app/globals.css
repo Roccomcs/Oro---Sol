@@ -165,9 +165,14 @@ img { display: block; max-width: 100%; }
   background: #030303;
   opacity: 1;
   transition: opacity 450ms ease, visibility 450ms ease;
+  animation: ocultar-presentacion-segura 450ms ease 1.8s forwards;
 }
 
-.presentacion-marca--saliendo { visibility: hidden; opacity: 0; }
+.presentacion-marca--saliendo {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
 
 .presentacion-marca__halo {
   position: absolute;
@@ -222,6 +227,15 @@ img { display: block; max-width: 100%; }
 @keyframes recorrer-linea {
   from { transform: translateX(-100%); }
   to { transform: translateX(100%); }
+}
+
+/* Evita bloquear la landing si un navegador pausa o interrumpe los temporizadores de React. */
+@keyframes ocultar-presentacion-segura {
+  to {
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+  }
 }
 
 @media (max-width: 639px) {
