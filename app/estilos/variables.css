@@ -1,0 +1,19 @@
+/**
+ * Centraliza los colores, fuentes y medidas compartidas por toda la marca.
+ */
+:root {
+  --negro-carbon: #070707;
+  --negro-suave: #10100f;
+  --dorado: #c8a45d;
+  --dorado-claro: #ead29a;
+  --marfil: #f3eee4;
+  --marfil-apagado: #cfc4b1;
+  --fuente-titulos: 'Castoro Titling', serif;
+  --fuente-textos: 'Lato', sans-serif;
+  --ancho-contenido: 76rem;
+  --background: #070707;
+  --foreground: #f3eee4;
+  --muted: #1b1916;
+  --border: rgb(200 164 93 / 28%);
+  --ring: #c8a45d;
+}

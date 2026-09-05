@@ -1,0 +1,30 @@
+/**
+ * Define revelados progresivos seguros y respetuosos del movimiento reducido.
+ */
+.revelar {
+  opacity: 0;
+  transform: translate3d(0, 1.5rem, 0);
+  transition:
+    opacity 650ms cubic-bezier(0.22, 1, 0.36, 1) var(--retraso-revelado, 0ms),
+    transform 650ms cubic-bezier(0.22, 1, 0.36, 1) var(--retraso-revelado, 0ms);
+}
+
+.revelar--visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+@media (scripting: none) {
+  .revelar {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .revelar,
+  .revelar--visible {
+    opacity: 1;
+    transform: none;
+  }
+}

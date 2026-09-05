@@ -1,0 +1,51 @@
+/**
+ * Da una apariencia coherente a skeletons, cargadores y notificaciones.
+ */
+.esqueleto-imagen {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  border-radius: 0;
+  background:
+    linear-gradient(110deg, transparent 18%, rgb(234 210 154 / 12%) 38%, transparent 58%),
+    #13120f;
+  background-size: 220% 100%;
+  animation: brillo-esqueleto 1.55s linear infinite;
+}
+
+.cargador {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+  color: var(--marfil-apagado);
+  font-size: 1.2rem;
+}
+
+.cargador__anillo {
+  width: 1.7rem;
+  aspect-ratio: 1;
+  border: 1px solid rgb(200 164 93 / 30%);
+  border-top-color: var(--dorado-claro);
+  border-radius: 50%;
+  animation: girar-cargador 850ms linear infinite;
+}
+
+.notificacion {
+  border: 1px solid rgb(200 164 93 / 42%) !important;
+  background: rgb(7 7 7 / 96%) !important;
+  color: var(--marfil) !important;
+  font-family: var(--fuente-textos) !important;
+  font-size: 1.15rem !important;
+}
+
+.notificacion__titulo {
+  font-family: var(--fuente-titulos) !important;
+}
+
+@keyframes brillo-esqueleto {
+  to { background-position-x: -220%; }
+}
+
+@keyframes girar-cargador {
+  to { transform: rotate(1turn); }
+}
