@@ -1,9 +1,8 @@
 /**
- * Presenta seis piezas en una cuadrícula editorial de tres columnas por fila.
+ * Presenta la colección mediante un carrusel circular adaptable.
  */
-import { joyas } from '../../contenido/joyas';
 import { RevelarAlDesplazar } from '../movimiento/RevelarAlDesplazar';
-import { ImagenGaleria } from './ImagenGaleria';
+import { CarruselGaleria } from './CarruselGaleria';
 
 export function Galeria() {
   return (
@@ -14,13 +13,9 @@ export function Galeria() {
         <p>Cadenas seleccionadas para iluminar tu estilo con una presencia sutil e inolvidable.</p>
       </RevelarAlDesplazar>
 
-      <div className="galeria__mosaico">
-        {joyas.map((joya, indice) => (
-          <RevelarAlDesplazar key={joya.id} retraso={(indice % 3) * 90}>
-            <ImagenGaleria joya={joya} />
-          </RevelarAlDesplazar>
-        ))}
-      </div>
+      <RevelarAlDesplazar retraso={90}>
+        <CarruselGaleria />
+      </RevelarAlDesplazar>
     </section>
   );
 }

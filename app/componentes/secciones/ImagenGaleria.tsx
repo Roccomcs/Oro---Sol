@@ -11,6 +11,7 @@ import { EsqueletoImagen } from '../retroalimentacion/EsqueletoImagen';
 /** Recibe una pieza ya normalizada desde el catálogo local. */
 interface PropiedadesImagenGaleria {
   joya: JoyaGaleria;
+  prioritaria?: boolean;
 }
 
 function crearFuentes(base: string, extension: 'avif' | 'webp') {
@@ -19,7 +20,7 @@ function crearFuentes(base: string, extension: 'avif' | 'webp') {
     .join(', ');
 }
 
-export function ImagenGaleria({ joya }: PropiedadesImagenGaleria) {
+export function ImagenGaleria({ joya, prioritaria = false }: PropiedadesImagenGaleria) {
   const [cargada, establecerCargada] = useState(false);
   const [error, establecerError] = useState(false);
 
@@ -40,15 +41,16 @@ export function ImagenGaleria({ joya }: PropiedadesImagenGaleria) {
           </div>
         ) : (
           <picture>
-            <source srcSet={crearFuentes(joya.imagen.base, 'avif')} sizes="(max-width: 639px) 100vw, (max-width: 959px) 50vw, 33vw" type="image/avif" />
-            <source srcSet={crearFuentes(joya.imagen.base, 'webp')} sizes="(max-width: 639px) 100vw, (max-width: 959px) 50vw, 33vw" type="image/webp" />
+            <source srcSet={crearFuentes(joya.imagen.base, 'avif')} sizes="(max-width: 639px) 78vw, 34vw" type="image/avif" />
+            <source srcSet={crearFuentes(joya.imagen.base, 'webp')} sizes="(max-width: 639px) 78vw, 34vw" type="image/webp" />
             <img
               ref={comprobarImagenCacheada}
               src={`/imagenes/galeria/${joya.imagen.base}-768.webp`}
               width={joya.imagen.ancho}
               height={joya.imagen.alto}
-              loading="lazy"
+              loading={prioritaria ? 'eager' : 'lazy'}
               decoding="async"
+              draggable={false}
               alt={joya.textoAlternativo}
               onLoad={() => establecerCargada(true)}
               onError={() => establecerError(true)}
